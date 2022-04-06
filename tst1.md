@@ -1,5 +1,21 @@
 
 
+```python
+from pygeodesy.sphericalNvector import LatLon
+p1 = LatLon(52.205, 0.119)
+p2 = LatLon(-10.205, 10.119)
+print (p1)
+print (p1.distanceTo(p2)/1000.0)
+```
+
+```text
+52.205°N, 000.119°E
+7005.37755888323
+```
+
+
+
+
 lat -90,90
 long -180,180
 
