@@ -1,5 +1,25 @@
 
 
+lat -90,90
+long -180,180
+
+```python
+clat,clon = 10,20
+zoom = 10
+MAX = 20
+xlims = [clon+(-180./MAX)*zoom, clon+(180./MAX)*zoom]
+ylims = [clat+(-90./MAX)*zoom, clat+(90./MAX)*zoom]
+print (xlims)
+print (ylims)
+```
+
+```text
+[-70.0, 110.0]
+[-35.0, 55.0]
+```
+
+
+
 
 ```python
 import shapefile
