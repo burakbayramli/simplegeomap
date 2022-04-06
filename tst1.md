@@ -1,102 +1,16 @@
 
-
 ```python
-from pygeodesy.sphericalNvector import LatLon
-p1 = LatLon(52.205, 0.119)
-p2 = LatLon(-10.205, 10.119)
-print (p1)
-print (p1.distanceTo(p2)/1000.0)
-```
+import simplemap
 
-```text
-52.205°N, 000.119°E
-7005.37755888323
-```
-
-
-
-
-lat -90,90
-long -180,180
-
-```python
-clat,clon = 10,20
-zoom = 10
-MAX = 20
-xlims = [clon+(-180./MAX)*zoom, clon+(180./MAX)*zoom]
-ylims = [clat+(-90./MAX)*zoom, clat+(90./MAX)*zoom]
-print (xlims)
-print (ylims)
-```
-
-```text
-[-70.0, 110.0]
-[-35.0, 55.0]
-```
-
-
-
-
-```python
-import shapefile
-sf = shapefile.Reader("TM_WORLD_BORDERS-0.3.shp", encoding = "ISO8859-1")
-
-r = sf.records()
-countries = sf.shapes()
-idx = 1
-country = countries[idx]
-crec = r[idx]
-lat,lon = crec[10],crec[9]
-bounds = list(country.parts) + [len(country.points)]
-print (lat,lon)
-```
-
-```text
-28.163 2.632
-```
-
-
-
-
-
-
-
-```python
-import shapefile
-sf = shapefile.Reader("TM_WORLD_BORDERS-0.3.shp", encoding = "ISO8859-1")
-
-def plot_country(countries, idx,color='r'):
-   country = countries[idx]
-   name = r[idx]
-   print (name)
-   bounds = list(country.parts) + [len(country.points)]
-   print (bounds)
-   for previous, current in zip(bounds, bounds[1:]):    
-       geo = [[x[0],x[1]] for x in country.points[previous:current]]
-       if len(geo) < 1: continue
-       geo = np.array(geo)
-       if geo.shape[0] > 0:
-           plt.plot(geo[:,0],geo[:,1],color)
-
-r = sf.records()
-countries = sf.shapes()
-
-plot_country(countries, 2,'r')
-plot_country(countries, 4,'b')
-
+clat,clon=10,30
+plt = simplemap.plot_countries(clat,clon,3)
+plt.plot(clon,clat,'rd')
 plt.savefig('out1.png')
 ```
 
 ```text
-Record #2: ['AJ', 'AZ', 'AZE', 31, 'Azerbaijan', 8260, 8352021, 142, 145, 47.395, 40.43]
-[0, 108, 118, 131, 859, 871]
-Record #4: ['AM', 'AM', 'ARM', 51, 'Armenia', 2820, 3017661, 142, 145, 44.563, 40.534]
-[0, 12, 395, 408, 418]
+Out[1]: [<matplotlib.lines.Line2D at 0x7f7e4de55e80>]
 ```
-
-
-
-
 
 
 
