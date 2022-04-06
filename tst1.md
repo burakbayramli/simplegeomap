@@ -1,4 +1,16 @@
 
+
+```python
+import pygeodesy
+print(pygeodesy. __version__)
+```
+
+```text
+21.08.31
+```
+
+
+
 ```python
 import simplemap
 

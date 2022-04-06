@@ -1,6 +1,5 @@
 from pygeodesy.sphericalNvector import LatLon
 import matplotlib.pyplot as plt
-import pandas as pd
 import numpy as np
 import shapefile
 
@@ -33,3 +32,11 @@ def plot_countries(clat,clon,zoom=7):
                 plt.plot(geo[:,0],geo[:,1],'b')
 
     return plt
+
+if __name__ == "__main__": 
+
+    import simplemap
+    clat,clon=10,30
+    plt = simplemap.plot_countries(clat,clon,3)
+    plt.plot(clon,clat,'rd')
+    plt.savefig('out1.png')    
