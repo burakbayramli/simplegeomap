@@ -1,4 +1,4 @@
-from pygeodesy.sphericalNvector import LatLon
+from pygeodesy.sphericalNvector import LatLon, perimeterOf, meanOf
 import matplotlib.pyplot as plt
 import numpy as np
 import shapefile
@@ -6,11 +6,11 @@ import pandas as pd
 
 def preprocess_GSHHS():
 
-    files = ["/home/burak/Downloads/gshhg-shp-2.3.7/GSHHS_shp/f/GSHHS_f_L2.shp",
-             "/home/burak/Downloads/gshhg-shp-2.3.7/WDBII_shp/f/WDBII_river_f_L02.shp"]
+    files = [("lake","/home/burak/Downloads/gshhg-shp-2.3.7/GSHHS_shp/f/GSHHS_f_L2.shp"),
+             ("riverperm","/home/burak/Downloads/gshhg-shp-2.3.7/WDBII_shp/f/WDBII_river_f_L02.shp")]
     
     res = []
-    for file in files:
+    for type,file in files:
         print (file)
         sf = shapefile.Reader(file)
         r = sf.records()
@@ -26,12 +26,13 @@ def preprocess_GSHHS():
             for (previous, current) in zip(bounds, bounds[1:]):
                 geo = [[x[1],x[0]] for x in country.points[previous:current]]
                 if len(geo) < 1: continue
-                nvecs = np.array([LatLon(a[0],a[1]).toNvector() for a in geo])
-                mid = nvecs.mean().toLatLon()
-                res.append([mid.lat,mid.lon,geo])
+                latlons = [LatLon(a[0],a[1]) for a in geo]
+                per = np.round(perimeterOf(latlons, radius=6371),2)
+                mid = meanOf(latlons)
+                res.append([mid.lat,mid.lon,per,type,geo])
 
     df = pd.DataFrame(res)
-    df.columns = ['lat','lon','polygon']
+    df.columns = ['lat','lon','perimeter','type','polygon']
     df.to_csv('/tmp/lake_river.csv',index=None)
 
 

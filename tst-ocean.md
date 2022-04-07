@@ -1,5 +1,51 @@
 
 
+```python
+import pandas as pd, zipfile
+from pygeodesy.sphericalNvector import LatLon
+with zipfile.ZipFile('/home/burak/Downloads/lake_river.zip', 'r') as z:
+      df =  pd.read_csv(z.open('lake_river.csv'))
+
+df = df[df['type'] == 'lake']
+df = df[df['perimeter'] > 400]
+clat,clon=39.06084392603182, 34.274201977299
+p1 = LatLon(clat,clon) 
+dist = df.apply(lambda x: p1.distanceTo(LatLon(x['lat'],x['lon']))/1000.0, axis=1)
+print (dist)
+```
+
+```text
+1       1466.055935
+2       8836.976175
+3       4480.322704
+4       2239.420633
+5       5053.736916
+           ...     
+6636    6767.882285
+6637    8559.598930
+6638    4304.898401
+6639    4411.553947
+6641    7025.123815
+Length: 156, dtype: float64
+```
+
+
+```python
+MAX = 20
+zoom = 1
+CENTER_DIST = (40000. / MAX)*(zoom+1)
+df2 = df[dist < CENTER_DIST]
+print (len(df))
+print (len(df2))
+```
+
+```text
+156
+44
+```
+
+
+
 
 ```python
 import pandas as pd
