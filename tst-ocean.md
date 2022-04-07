@@ -1,5 +1,46 @@
 
 
+
+```python
+import pandas as pd
+
+df = pd.read_csv('/tmp/out.csv')
+print (df.columns)
+print (df.index)
+```
+
+```text
+Index(['lat', 'lon', 'polygon'], dtype='object')
+RangeIndex(start=0, stop=1, step=1)
+```
+
+
+```python
+import json
+coords = df.loc[0,'polygon']
+print (type(coords))
+coords = json.loads(coords)
+print (type(coords))
+print (coords[0])
+```
+
+```text
+<class 'str'>
+<class 'list'>
+[18.145286, 145.762963]
+```
+
+
+
+
+
+
+
+
+
+
+
+
 ```python
 from pygeodesy.sphericalNvector import LatLon
 import matplotlib.pyplot as plt
