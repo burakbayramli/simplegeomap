@@ -1,10 +1,27 @@
 from pygeodesy.sphericalNvector import LatLon
+import pandas as pd, zipfile
 import matplotlib.pyplot as plt
 import numpy as np
 import shapefile
 
+MAX = 20
+
+def plot_water(clat,clon,zoom,plt):
+    with zipfile.ZipFile('/home/burak/Downloads/lake_river.zip', 'r') as z:
+        df =  pd.read_csv(z.open('lake_river.csv'))
+
+    df = df[df['type'] == 'lake']
+    df = df[df['perimeter'] > 400]
+    p1 = LatLon(clat,clon) 
+    dist = df.apply(lambda x: p1.distanceTo(LatLon(x['lat'],x['lon']))/1000.0, axis=1)
+    zoom = 1
+    CENTER_DIST = (40000. / MAX)*(zoom+1)
+    df2 = df[dist < CENTER_DIST]
+    for idx,row in df2.iterrows():
+        print (row['polygon'])
+    
+
 def plot_countries(clat,clon,zoom=7):
-    MAX = 20    
     CENTER_DIST = (40000. / MAX)*(zoom+1)
     xlims = (clon+(-180./MAX)*zoom, clon+(180./MAX)*zoom)
     ylims = (clat+(-90./MAX)*zoom, clat+(90./MAX)*zoom)
@@ -37,7 +54,12 @@ def plot_countries(clat,clon,zoom=7):
 if __name__ == "__main__": 
 
     import simplemap
-    clat,clon=10,30
-    plt = simplemap.plot_countries(clat,clon,3)
-    plt.plot(clon,clat,'rd')
-    plt.savefig('out1.png')    
+    
+#    clat,clon=10,30
+#    plt = simplemap.plot_countries(clat,clon,3)
+#    plt.plot(clon,clat,'rd')
+#    plt.savefig('out1.png')
+
+    clat,clon=39.06084392603182, 34.274201977299
+    simplemap.plot_water(clat,clon,3,plt)
+

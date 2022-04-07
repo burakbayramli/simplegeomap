@@ -1,6 +1,19 @@
 
 
 ```python
+import simplemap
+clat,clon=39.06084392603182, 34.274201977299
+simplemap.plot_water(clat,clon,3,plt)
+```
+
+
+
+
+
+
+
+
+```python
 import pandas as pd, zipfile
 from pygeodesy.sphericalNvector import LatLon
 with zipfile.ZipFile('/home/burak/Downloads/lake_river.zip', 'r') as z:
