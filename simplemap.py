@@ -6,7 +6,7 @@ import numpy as np, json, shapefile
 MAX = 20
 
 def plot_water(clat,clon,zoom,plt):
-    with zipfile.ZipFile('/home/burak/Downloads/lake_river.zip', 'r') as z:
+    with zipfile.ZipFile('lake_river.zip', 'r') as z:
         df =  pd.read_csv(z.open('lake_river.csv'))
 
     df = df[df['type'] == 'lake']
