@@ -8,7 +8,7 @@ from scipy.interpolate import Rbf
 
 tiff_file = "/home/burak/Downloads/dem_geotiff/DEM_geotiff/alwdgg.tif"
 
-area_box = ((26,36), (46,43))
+area_box = ((25,34), (46,43))
 
 g = GeoTiff(tiff_file, crs_code=4326, as_crs=4326,  band=0)
 arr = g.read_box(area_box)
@@ -21,6 +21,6 @@ Y = np.linspace(area_box[0][1],area_box[1][1],arr.shape[0])
 
 X,Y = np.meshgrid(X,Y)
 
-CS=plt.contour(X,Y,arr,levels=[500,1000,2000,3000])
+CS=plt.contour(X,Y,arr,levels=[500,1000,2000,2500,3000])
 plt.clabel(CS, fontsize=10, inline=1)
 plt.savefig('out4.png')

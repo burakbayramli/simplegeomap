@@ -20,10 +20,16 @@ Y = np.linspace(area_box[0][1],area_box[1][1],arr.shape[0])
 
 X,Y = np.meshgrid(X,Y)
 
+NX,NY=15,20
+np.random.seed(0)
+idx = np.random.choice(range(X.shape[0]*X.shape[1]),size=NX*NY)
+X2 = X.flatten()[idx].reshape(NX,NY)
+Y2 = Y.flatten()[idx].reshape(NX,NY)
+arr2 = arr.flatten()[idx].reshape(NX,NY)
 
-#rbfi = Rbf(X2,Y2,arr2)
-#arrhat = rbfi(X,Y)
-#arrhat[arrhat<0] = 0.0
-#CS=plt.contour(X,Y,arrhat)
-#plt.clabel(CS, fontsize=10, inline=1)
-#plt.savefig('out4.png')
+rbfi = Rbf(X2,Y2,arr2)
+arrhat = rbfi(X,Y)
+arrhat[arrhat<0] = 0.0
+CS=plt.contour(X,Y,arrhat,levels=[500,1000,2000,2500,3000])
+plt.clabel(CS, fontsize=10, inline=1)
+plt.savefig('out4.png')
