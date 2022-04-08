@@ -5,20 +5,20 @@ import numpy as np, json, shapefile
 
 MAX = 20
 
-def plot_water(clat,clon,zoom,plt):
+def plot_water(clat,clon,zoom):
+    CENTER_DIST = (40000. / MAX)*(zoom+1)
+    
     with zipfile.ZipFile('lake_river.zip', 'r') as z:
         df =  pd.read_csv(z.open('lake_river.csv'))
 
     df = df[df['type'] == 'lake']
-    #df = df[df['perimeter'] > 400]
+    df = df[df['perimeter'] > 100]
     p1 = LatLon(clat,clon) 
     dist = df.apply(lambda x: p1.distanceTo(LatLon(x['lat'],x['lon']))/1000.0, axis=1)
-    CENTER_DIST = (40000. / MAX)*(zoom+1)
     df2 = df[dist < CENTER_DIST]
-    #df2 = df
     for idx,row in df2.iterrows():
         geo = np.array(json.loads(row['polygon']))
-        plt.fill(geo[:,1],geo[:,0],'black',alpha=0.4)
+        plt.fill(geo[:,1],geo[:,0],'blue',alpha=0.4)
         
     
 
@@ -27,7 +27,6 @@ def plot_countries(clat,clon,zoom=7):
     xlims = (clon+(-180./MAX)*zoom, clon+(180./MAX)*zoom)
     ylims = (clat+(-90./MAX)*zoom, clat+(90./MAX)*zoom)
     p1 = LatLon(clat, clon)
-    plt.figure()
     plt.axes().set_facecolor(color='lightblue')
     sf = shapefile.Reader("TM_WORLD_BORDERS-0.3.shp", encoding = "ISO8859-1")
     r = sf.records()
@@ -50,17 +49,17 @@ def plot_countries(clat,clon,zoom=7):
                 plt.fill(geo[:,0],geo[:,1],'lightyellow',alpha=0.5)
                 plt.plot(geo[:,0],geo[:,1],'b')
 
-    plot_water(clat,clon,zoom,plt)
-                
-    return plt
-
 if __name__ == "__main__": 
 
     import simplemap
+
+    plt.figure()
     
 #    clat,clon=10,30
     clat,clon=39.06084392603182, 34.274201977299
-    plt = simplemap.plot_countries(clat,clon,1)
+    zoom = 1
+    simplemap.plot_countries(clat,clon,zoom)
+    simplemap.plot_water(clat,clon,zoom)
     plt.plot(clon,clat,'rd')
     plt.savefig('out1.png')
 
