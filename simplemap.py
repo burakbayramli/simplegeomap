@@ -66,4 +66,3 @@ if __name__ == "__main__":
 #    clat,clon=39.06084392603182, 34.274201977299
 #    simplemap.plot_water(clat,clon,3,plt)
 #    plt.savefig('out3.png')
-
