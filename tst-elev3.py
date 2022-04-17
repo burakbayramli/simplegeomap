@@ -1,3 +1,4 @@
+from scipy.ndimage import gaussian_filter
 import pandas as pd
 import numpy as np
 from skimage.measure import block_reduce
@@ -6,7 +7,7 @@ from geotiff import GeoTiff
 import matplotlib.pyplot as plt
 from scipy.interpolate import Rbf
 
-tiff_file = "/home/burak/Downloads/dem_geotiff/DEM_geotiff/alwdgg.tif"
+tiff_file = "alwdgg.tif"
 
 area_box = ((25,34), (46,43))
 
@@ -21,6 +22,8 @@ Y = np.linspace(area_box[0][1],area_box[1][1],arr.shape[0])
 
 X,Y = np.meshgrid(X,Y)
 
-CS=plt.contour(X,Y,arr,levels=[500,1000,2000,2500,3000])
+arr = gaussian_filter(arr, sigma=1.5)
+
+CS=plt.contour(X,Y,arr,cmap=plt.cm.Reds)
 plt.clabel(CS, fontsize=10, inline=1)
 plt.savefig('out4.png')
