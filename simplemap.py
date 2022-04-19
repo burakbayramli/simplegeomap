@@ -8,11 +8,11 @@ MAX = 20
 def plot_water(clat,clon,zoom):
     CENTER_DIST = (40000. / MAX)*(zoom+1)
     
-    with zipfile.ZipFile('lake_river.zip', 'r') as z:
+    with zipfile.ZipFile('/home/burak/Downloads/lake_river.zip', 'r') as z:
         df =  pd.read_csv(z.open('lake_river.csv'))
 
-    df = df[df['type'] == 'lake']
-    df = df[df['perimeter'] > 100]
+    #df = df[df['type'] == 'lake']
+    #df = df[df['perimeter'] > 100]
     p1 = LatLon(clat,clon) 
     dist = df.apply(lambda x: p1.distanceTo(LatLon(x['lat'],x['lon']))/1000.0, axis=1)
     df2 = df[dist < CENTER_DIST]

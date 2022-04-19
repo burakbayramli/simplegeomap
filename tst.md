@@ -1,8 +1,4 @@
 
-
-
-
-
 ```python
 from pygeodesy.sphericalNvector import LatLon
 zoom=0.5
@@ -37,7 +33,6 @@ simplemap.plot_countries(clat,clon,zoom)
 simplemap.plot_water(clat,clon,zoom)
 plt.plot(clon,clat,'rd')
 plt.savefig('out1.png')
-plt.clf()
 ```
 
 
