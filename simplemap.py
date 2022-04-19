@@ -68,34 +68,29 @@ def plot_elevation(clat,clon,zoom):
 
     g = GeoTiff(tiff_file, crs_code=4326, as_crs=4326,  band=0)
     arr = g.read_box(area_box)
-    arr = np.flip(arr,axis=0)
+    arr = np.flip(arr,axis=0)    
     print (arr.shape)
     arr[arr<0.0] = 0.0
+    arr = arr + 1000.0 # every height seems to be this much lower
 
     X = np.linspace(area_box[0][0],area_box[1][0],arr.shape[1])
     Y = np.linspace(area_box[0][1],area_box[1][1],arr.shape[0])
 
     X,Y = np.meshgrid(X,Y)
 
-    arr = gaussian_filter(arr, sigma=1.5)
+    arr = gaussian_filter(arr, sigma=1.0)
 
     CS=plt.contour(X,Y,arr,cmap=plt.cm.Reds)
     plt.clabel(CS, fontsize=10, inline=1)
                 
 if __name__ == "__main__": 
-
-    import simplemap
-
-    plt.figure()
     
-#    clat,clon=10,30
-    clat,clon=39.06084392603182, 34.274201977299
-    zoom = 1
-    simplemap.plot_countries(clat,clon,zoom)
-    simplemap.plot_water(clat,clon,zoom)
+    #clat,clon=10,30
+    clat,clon=39.06084392603182, 34.274201977299; zoom = 1.0
+    #clat,clon=40.074983672293875, 29.247377603127884; zoom = 0.3
+
+    plot_countries(clat,clon,zoom)
+    #plot_water(clat,clon,zoom)
+    plot_elevation(clat,clon,zoom)
     plt.plot(clon,clat,'rd')
     plt.savefig('out1.png')
-
-#    clat,clon=39.06084392603182, 34.274201977299
-#    simplemap.plot_water(clat,clon,3,plt)
-#    plt.savefig('out3.png')
