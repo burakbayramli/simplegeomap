@@ -1,5 +1,5 @@
 from pygeodesy.sphericalNvector import LatLon
-import pandas as pd, zipfile
+import pandas as pd, zipfile, sys, os
 import matplotlib.pyplot as plt
 import numpy as np, json, shapefile
 from scipy.ndimage import gaussian_filter
@@ -8,9 +8,11 @@ from geotiff import GeoTiff
 MAX = 20
 
 def plot_water(clat,clon,zoom):
+    data_dir = os.path.dirname(__file__)
+    
     CENTER_DIST = (40000. / MAX)*(zoom+1)
     
-    with zipfile.ZipFile('/home/burak/Downloads/lake_river.zip', 'r') as z:
+    with zipfile.ZipFile(data_dir + '/lake_river.zip', 'r') as z:
         df =  pd.read_csv(z.open('lake_river.csv'))
 
     #df = df[df['type'] == 'lake']
@@ -23,12 +25,15 @@ def plot_water(clat,clon,zoom):
         plt.fill(geo[:,1],geo[:,0],'blue',alpha=0.4)
    
 def plot_countries(clat,clon,zoom=7):
+
+    data_dir = os.path.dirname(__file__)
+    
     CENTER_DIST = (40000. / MAX)*(zoom+1)
     xlims = (clon+(-180./MAX)*zoom, clon+(180./MAX)*zoom)
     ylims = (clat+(-90./MAX)*zoom, clat+(90./MAX)*zoom)
     p1 = LatLon(clat, clon)
     plt.axes().set_facecolor(color='lightblue')
-    sf = shapefile.Reader("TM_WORLD_BORDERS-0.3.shp", encoding = "ISO8859-1")
+    sf = shapefile.Reader(data_dir + "/TM_WORLD_BORDERS-0.3.shp", encoding = "ISO8859-1")
     r = sf.records()
     countries = sf.shapes()
     for idx in range(len(countries)):
@@ -52,7 +57,8 @@ def plot_countries(clat,clon,zoom=7):
 
 def plot_elevation(clat,clon,zoom):
 
-    tiff_file = "alwdgg.tif"
+    data_dir = os.path.dirname(__file__)
+    tiff_file = data_dir + "/alwdgg.tif"
 
     from pygeodesy.sphericalNvector import LatLon
     MAX = 20

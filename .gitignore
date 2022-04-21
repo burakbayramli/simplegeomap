@@ -1,3 +1,6 @@
 out*.png
 *.pyc
 __pycache__
+build
+dist
+simplemap.egg-info
