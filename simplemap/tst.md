@@ -1,5 +1,14 @@
 
 
+
+
+
+
+
+
+
+
+
 ```python
 import simplemap
 #clat,clon=10,30
@@ -10,7 +19,7 @@ simplemap.plot_countries(clat,clon,zoom)
 #simplemap.plot_water(clat,clon,zoom)
 simplemap.plot_elevation(clat,clon,zoom)
 plt.plot(clon,clat,'rd')
-plt.savefig('out1.png')
+plt.savefig('/tmp/out1.png')
 ```
 
 ```text

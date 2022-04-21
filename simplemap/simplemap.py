@@ -91,10 +91,7 @@ def plot_elevation(clat,clon,zoom):
                 
 if __name__ == "__main__": 
     
-    #clat,clon=10,30
     clat,clon=39.06084392603182, 34.274201977299; zoom = 1.0
-    #clat,clon=40.074983672293875, 29.247377603127884; zoom = 0.3
-
     plot_countries(clat,clon,zoom)
     #plot_water(clat,clon,zoom)
     plot_elevation(clat,clon,zoom)
