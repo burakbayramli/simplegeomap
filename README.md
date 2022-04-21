@@ -9,11 +9,12 @@ Each land feature can be enabled through its API call.
 
 ## Installation
 
-`pip install simplegeomap
+`pip install simplegeomap`
 
 ## How To Use
 
 ```python
+import matplotlib.pyplot as plt
 import simplegeomap
 
 clat,clon=41,14
