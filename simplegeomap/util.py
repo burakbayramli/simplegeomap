@@ -6,10 +6,10 @@ import pandas as pd
 
 def preprocess_GSHHS():
 
-    files = [("lake","/home/burak/Downloads/gshhg-shp-2.3.7/GSHHS_shp/f/GSHHS_f_L2.shp"),
-             ("river1","/home/burak/Downloads/gshhg-shp-2.3.7/WDBII_shp/f/WDBII_river_f_L02.shp"),
-             ("river2","/home/burak/Downloads/gshhg-shp-2.3.7/WDBII_shp/f/WDBII_river_f_L03.shp"),
-             ("river3","/home/burak/Downloads/gshhg-shp-2.3.7/WDBII_shp/f/WDBII_river_f_L04.shp")
+    files = [("lake","/tmp/gshhg-shp-2.3.7/GSHHS_shp/f/GSHHS_f_L2.shp"),
+             ("river1","/tmp/gshhg-shp-2.3.7/WDBII_shp/f/WDBII_river_f_L02.shp"),
+             ("river2","/tmp/gshhg-shp-2.3.7/WDBII_shp/f/WDBII_river_f_L03.shp"),
+             ("river3","/tmp/gshhg-shp-2.3.7/WDBII_shp/f/WDBII_river_f_L04.shp")
     ]
     
     res = []

@@ -86,9 +86,14 @@ def plot_elevation(clat,clon,zoom):
 
     arr = gaussian_filter(arr, sigma=1.0)
 
-    CS=plt.contour(X,Y,arr,cmap=plt.cm.Reds)
+    CS=plt.contour(X,Y,arr,cmap=plt.cm.binary)
     plt.clabel(CS, fontsize=10, inline=1)
-                
+
+def plot_region(regarr,color='lightgay',alpha=0.5):
+    plt.fill(regarr[:,1],regarr[:,0],color=color,alpha=alpha)
+   
+
+    
 if __name__ == "__main__": 
     
     clat,clon=39.06084392603182, 34.274201977299; zoom = 1.0
