@@ -3,4 +3,4 @@ out*.png
 __pycache__
 build
 dist
-simplemap.egg-info
+simplegeomap.egg-info

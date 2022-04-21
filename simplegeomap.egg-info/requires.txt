@@ -1,4 +1,0 @@
-pandas
-pygeodesy
-matplotlib
-numpy
