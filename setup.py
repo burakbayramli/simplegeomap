@@ -4,11 +4,11 @@ readme=open("README.md").read()
 
 setuptools.setup(
     name='simplegeomap',    
-    version='0.0.5',
+    version='0.0.6',
     description="Simple offline map plot utility, for country borders, elevation, water",
     long_description=readme,
     long_description_content_type="text/markdown",    
-    install_requires=['pandas','pygeodesy','matplotlib','numpy','pyshp','scipy'],
+    install_requires=['pandas','pygeodesy','matplotlib','numpy','pyshp','scipy','zarr','pyproj'],
     include_package_data=True,
     url="https://github.com/burakbayramli/simplegeomap",
     author="Burak Bayramli",
