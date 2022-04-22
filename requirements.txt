@@ -1,5 +1,6 @@
-shapefile==2.1.2
-numpy==1.19.2
-matplotlib==3.3.2
-pygeodesy==21.08.31
 pandas==1.1.2
+pygeodesy==21.08.31
+matplotlib==3.3.2
+numpy==1.19.2
+pyshp==2.1.2
+scipy==1.5.4

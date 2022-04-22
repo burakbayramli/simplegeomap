@@ -3,7 +3,7 @@ import pandas as pd, zipfile, sys, os
 import matplotlib.pyplot as plt
 import numpy as np, json, shapefile
 from scipy.ndimage import gaussian_filter
-from geotiff import GeoTiff 
+from .geotiff import GeoTiff 
 
 MAX = 20
 
