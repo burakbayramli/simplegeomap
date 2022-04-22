@@ -1,1 +1,1 @@
-from .simplemap import *
+from .simplegeomap import *
