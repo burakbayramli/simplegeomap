@@ -17,7 +17,7 @@ Each land feature can be enabled through its API call.
 import matplotlib.pyplot as plt
 import simplegeomap
 
-clat,clon=41,14
+clat,clon=41,14; zoom = 1.0
 
 simplegeomap.plot_countries(clat,clon,zoom)
 

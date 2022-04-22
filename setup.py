@@ -4,7 +4,7 @@ readme=open("README.md").read()
 
 setuptools.setup(
     name='simplegeomap',    
-    version='0.0.6',
+    version='0.0.7',
     description="Simple offline map plot utility, for country borders, elevation, water",
     long_description=readme,
     long_description_content_type="text/markdown",    
