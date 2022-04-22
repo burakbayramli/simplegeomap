@@ -1,6 +1,4 @@
 
-41, 14
-
 ```python
 import simplegeomap
 #clat,clon=10,30
