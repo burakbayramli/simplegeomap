@@ -1,10 +1,9 @@
 from pygeodesy.sphericalNvector import LatLon
-import pandas as pd, zipfile, sys, os
+import pandas as pd, zipfile, sys, os, csv, io
 import matplotlib.pyplot as plt
 import numpy as np, json, shapefile
 from scipy.ndimage import gaussian_filter
 from .geotiff import GeoTiff
-import zipfile, csv, io
 
 MAX = 20
 
