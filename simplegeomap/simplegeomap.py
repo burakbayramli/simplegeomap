@@ -3,7 +3,8 @@ import pandas as pd, zipfile, sys, os
 import matplotlib.pyplot as plt
 import numpy as np, json, shapefile
 from scipy.ndimage import gaussian_filter
-from .geotiff import GeoTiff 
+from .geotiff import GeoTiff
+import zipfile, csv, io
 
 MAX = 20
 
@@ -89,14 +90,26 @@ def plot_elevation(clat,clon,zoom):
     CS=plt.contour(X,Y,arr,cmap=plt.cm.binary)
     plt.clabel(CS, fontsize=10, inline=1)
 
-def plot_line(regarr,color='black',alpha=0.5):
-    plt.plot(regarr[:,1],regarr[:,0],color=color,alpha=alpha)
+def plot_line(regarr,color='black',linestyle='solid'):
+    plt.plot(regarr[:,1],regarr[:,0],color=color,linestyle=linestyle)
        
 def plot_region(regarr,color='lightgray',alpha=0.5):
     plt.fill(regarr[:,1],regarr[:,0],color=color,alpha=alpha)
-   
 
+def find_city(name,country):
+    zip_file    = zipfile.ZipFile('cities.zip')
+    items_file  = zip_file.open('cities.csv')
+    items_file  = io.TextIOWrapper(items_file)
+    rd = csv.reader(items_file)
+    headers = {k: v for v, k in enumerate(next(rd))}
+    res = []
+    for row in rd:
+        if name in row[headers['name']].lower() and \
+           country==row[headers['country_name']].lower(): res.append(row)
+
+    return res
     
+       
 if __name__ == "__main__": 
     
     clat,clon=39.06084392603182, 34.274201977299; zoom = 1.0
