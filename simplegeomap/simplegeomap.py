@@ -24,7 +24,7 @@ def plot_water(clat,clon,zoom):
         geo = np.array(json.loads(row['polygon']))
         plt.fill(geo[:,1],geo[:,0],'blue',alpha=0.4)
    
-def plot_countries(clat,clon,zoom=7):
+def plot_countries(clat,clon,zoom=7,outcolor='lightblue'):
 
     data_dir = os.path.dirname(__file__)
     
@@ -32,7 +32,7 @@ def plot_countries(clat,clon,zoom=7):
     xlims = (clon+(-180./MAX)*zoom, clon+(180./MAX)*zoom)
     ylims = (clat+(-90./MAX)*zoom, clat+(90./MAX)*zoom)
     p1 = LatLon(clat, clon)
-    plt.axes().set_facecolor(color='lightblue')
+    plt.axes().set_facecolor(color=outcolor)
     sf = shapefile.Reader(data_dir + "/TM_WORLD_BORDERS-0.3.shp", encoding = "ISO8859-1")
     r = sf.records()
     countries = sf.shapes()
@@ -89,7 +89,10 @@ def plot_elevation(clat,clon,zoom):
     CS=plt.contour(X,Y,arr,cmap=plt.cm.binary)
     plt.clabel(CS, fontsize=10, inline=1)
 
-def plot_region(regarr,color='lightgay',alpha=0.5):
+def plot_line(regarr,color='black',alpha=0.5):
+    plt.plot(regarr[:,1],regarr[:,0],color=color,alpha=alpha)
+       
+def plot_region(regarr,color='lightgray',alpha=0.5):
     plt.fill(regarr[:,1],regarr[:,0],color=color,alpha=alpha)
    
 
