@@ -97,7 +97,8 @@ def plot_region(regarr,color='lightgray',alpha=0.5):
     plt.fill(regarr[:,1],regarr[:,0],color=color,alpha=alpha)
 
 def find_city(name,country):
-    zip_file    = zipfile.ZipFile('cities.zip')
+    data_dir = os.path.dirname(__file__)
+    zip_file    = zipfile.ZipFile(data_dir + '/cities.zip')
     items_file  = zip_file.open('cities.csv')
     items_file  = io.TextIOWrapper(items_file)
     rd = csv.reader(items_file)
