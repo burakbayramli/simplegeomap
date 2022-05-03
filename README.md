@@ -44,8 +44,3 @@ In order to regenerate the water data from its raw sources, see
 `util.preprocess_GSHHS`, assuming the data is unzipped under `/tmp` it
 will recreate the datafile.
 
-## Notes
-
-Tiffile and Geotiff are from 2021.7.2 and 0.2.4 PyPi source files, respectively.
-
-
