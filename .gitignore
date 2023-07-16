@@ -1,0 +1,7 @@
+out*.png
+*.pyc
+__pycache__
+build
+dist
+simplegeomap.egg-info
+work.md
