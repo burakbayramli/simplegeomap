@@ -120,59 +120,10 @@ def cdist(p1,p2):
     distances = np.linalg.norm(p1 - p2, axis=1)
     return distances
 
-class QuadTreeInterpolator:
-    #def __init__(self):
-    def __init__(self):
-        self.tree = quads.QuadTree((0,0), 500, 500)
-
-    def append(self, x, y, z):
-        for xx,yy,zz in zip(x,y,z):
-            self.tree.insert((xx,yy),data=zz)
-
-    def interp_cell(self, x, y, points):
-        a = np.array([x,y]).reshape(-1,2)
-        b = np.array(points)[:,:2]
-        ds = cdist(a,b)
-        ds = ds / np.sum(ds)
-        ds = 1. - ds
-        c = np.array(points)[:,2]
-        iz = np.sum(c * ds) / np.sum(ds)
-        return iz
-            
-    def interpolate(self,x,y):
-        res = self.tree.nearest_neighbors((x,y), count=4)
-        points = np.array([[c.x, c.y, c.data] for c in res])
-        return self.interp_cell(x, y, points)
 
 def find_tile(lat,lon):
     res = [lat >= x[0] and lon < x[1] and lon >= x[2] and lon < x[3] for x in gltiles.values()]
     return res.index(True)
-
-@cached(cache=FIFOCache(maxsize=4))
-def get_quad(clats,clons,tile,data_dir=None):
-
-    if not data_dir: data_dir = os.path.dirname(__file__)
-    print ('data_dir',data_dir)
-    npz_file = data_dir + "/" + tile + ".npz"
-    if os.path.exists(npz_file) == False:
-        s = "Required data file for tile %s not found, place the required npz file under %s, see https://github.com/burakbayramli/simplegeomap/blob/main/elevation.md for details" % (tile,data_dir)
-        raise ValueError(s)
-    zm = np.load(npz_file)
-    zm = zm['arr_0']
-    clats = list(clats)
-    clons = list(clons)
-    print ('clat clons',clats,clons)
-    skip = np.min([len(clats),len(clons)])
-    lat_min, lat_max, lon_min, lon_max, elev_min, elev_max, cols, rows = gltiles[tile]    
-    lon = lon_min + 1/120*np.arange(cols)
-    lat = lat_max - 1/120*np.arange(rows)
-    d = [[x,y,zm[i,j]] for i,y in enumerate(lat) for j,x in enumerate(lon) if i%skip==0 and int(y) in clats and int(x) in clons]
-    d = np.array(d)
-    d = d[d[:,2]>-1]
-    print ('d',d.shape)
-    q = QuadTreeInterpolator()
-    q.append(d[:,0],d[:,1],d[:,2])
-    return q
 
 def test1():
     x = np.array(list(range(4,10)))

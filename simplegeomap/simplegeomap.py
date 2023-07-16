@@ -134,15 +134,6 @@ def plot_elevation(clat,clon,zoom,levels=None,ax=None):
     xx,yy = np.meshgrid(x,y)
     CS=plt.contour(xx,yy,arr,cmap=plt.cm.binary)
     plt.clabel(CS, fontsize=10, inline=1)
-
-def elev_at(clat,clon):    
-    clats = [int(clat)-1, int(clat), int(clat)+1]
-    clons = [int(clon)-1, int(clon), int(clon)+1]
-    tkeys = np.array(list(gltiles.keys()))
-    tile = tkeys[find_tile(clat,clon)]    
-    q = get_quad(tuple(clats),tuple(clons),tile)
-    res = q.interpolate(clon,clat)
-    return res
     
 def plot_line(regarr,ax,color='black',linestyle='solid'):
     ax.plot(regarr[:,1],regarr[:,0],color=color,linestyle=linestyle)
