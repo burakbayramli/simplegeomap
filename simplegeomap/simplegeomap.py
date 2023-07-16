@@ -141,6 +141,10 @@ def plot_elevation(clat,clon,zoom,levels=None,ax=None):
 def plot_line(regarr,ax,color='black',linestyle='solid'):
     ax.plot(regarr[:,1],regarr[:,0],color=color,linestyle=linestyle)
        
+def plot_poly(regarr,ax,color='black',linestyle='solid'):
+    newarr = np.vstack((regarr,regarr[0,:]))
+    ax.plot(newarr[:,1],newarr[:,0],color=color,linestyle=linestyle)
+       
 def plot_region(regarr,ax,color='lightgray',alpha=0.5):
     ax.fill(regarr[:,1],regarr[:,0],color=color,alpha=alpha)
     
