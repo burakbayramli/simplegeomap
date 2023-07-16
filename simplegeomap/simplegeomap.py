@@ -1,4 +1,4 @@
-from simplegeomap.util import gltiles, find_tile, get_quad, conv2d, initialize_kernel, padding
+from simplegeomap.util import gltiles, find_tile, conv2d, initialize_kernel, padding
 from pygeodesy.sphericalNvector import LatLon
 import pandas as pd, zipfile, sys, os, csv, io
 from PIL import Image
@@ -132,7 +132,10 @@ def plot_elevation(clat,clon,zoom,levels=None,ax=None):
     x = np.linspace(lon[lonidx[0]],lon[lonidx[-1]],W)
     y = np.linspace(lat[latidx[0]],lat[latidx[-1]],H)
     xx,yy = np.meshgrid(x,y)
-    CS=plt.contour(xx,yy,arr,cmap=plt.cm.binary)
+    if levels: 
+        CS=plt.contour(xx,yy,arr,cmap=plt.cm.binary,levels=levels)
+    else:
+        CS=plt.contour(xx,yy,arr,cmap=plt.cm.binary)
     plt.clabel(CS, fontsize=10, inline=1)
     
 def plot_line(regarr,ax,color='black',linestyle='solid'):
