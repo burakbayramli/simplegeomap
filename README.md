@@ -56,6 +56,8 @@ The only addition here was a new column for asciified city names using
 
 Elevation Data is taken from NOAA, datafile is from [here](https://www.ngdc.noaa.gov/mgg/topo/gltiles.html)
 download "all files in on zip", extract zip under /tmp, then run `util.preprocess_GLOBE`.
+GLOBE means Global Land One-kilometer Base Elevation, meaning the resolution of
+each grid is 1 km square.
 
 ## Links
 
