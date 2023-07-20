@@ -56,8 +56,8 @@ def preprocess_GLOBE_tile(tile):
 
     zm = z[np.ix_(lat_select,lon_select)]
     zm[zm<0] = 0
-    np.savez_compressed("/tmp/" + tile + '.npz',zm)
-
+    np.savez_compressed("/tmp/all10/" + tile + '.npz',zm)
+    
 def preprocess_GLOBE():
     d = "/tmp/all10/*"
     if len(glob.glob(d)) == 0: raise ValueError(d + " does not exist")

@@ -110,7 +110,7 @@ def plot_elevation(clat,clon,zoom,levels=None,ax=None):
 
     npz_file = data_dir + "/" + tile + ".npz"
     if os.path.exists(npz_file) == False:
-        s = "Required data file for tile %s not found, place the required npz file under %s, see https://github.com/burakbayramli/simplegeomap/blob/main/elevation.md for details" % (tile,data_dir)
+        s = "Required data file for tile %s not found, place the required npz file under %s, see README for details" % (tile,data_dir)
         raise ValueError(s)
     zm = np.load(npz_file)
     zm = zm['arr_0']
