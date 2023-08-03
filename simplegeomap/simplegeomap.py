@@ -8,7 +8,7 @@ import numpy as np, json, shapefile
 
 GWIDTH = 200
     
-def plot_water(clat,clon,zoom,ax=None):
+def plot_water(clat,clon,zoom,watercolor='cyan',ax=None):
     if not ax: fig, ax = plt.subplots()
     data_dir = os.path.dirname(__file__)    
     lim = 2
@@ -30,7 +30,7 @@ def plot_water(clat,clon,zoom,ax=None):
         mid = meanOf(latlons)
         latlons = [[a.lat,a.lon] for a in latlons]
         #folium.PolyLine(locations=latlons,weight=2,color = 'red').add_to(m)
-        plot_line(np.array(latlons), ax, color='blue')
+        plot_line(np.array(latlons), ax, color=watercolor)
 
     file = data_dir + "/GSHHS_l_L2.shp"
 
@@ -49,7 +49,7 @@ def plot_water(clat,clon,zoom,ax=None):
         mid = meanOf(latlons)
         latlons = [[a.lat,a.lon] for a in latlons]
         #folium.Polygon(locations=latlons,weight=2,color = 'red').add_to(m)
-        plot_region(np.array(latlons), ax, color='blue')
+        plot_region(np.array(latlons), ax, color=watercolor)
 
               
 def plot_countries(clat,clon,zoom=7,incolor='lightyellow',outcolor='lightblue',country_color={},ax=None,force_include=['']):

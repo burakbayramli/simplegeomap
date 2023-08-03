@@ -13,7 +13,7 @@ setuptools.setup(
     url="https://github.com/burakbayramli/simplegeomap",
     author="Burak Bayramli",
     package_data={
-        "": ["*.dbf", "*.shp","*.zip","*.npz","*.csv"]
+        "": ["*.dbf", "*.shp","*.zip","*.npz","*.csv","*.shx", "*.prj"]
     },
     packages=setuptools.find_packages(),
  )

@@ -106,7 +106,6 @@ def test3():
                    
 if __name__ == "__main__": 
     
-    #preprocess_GSHHS()
     preprocess_GLOBE()
     #test1()
     #test2()
