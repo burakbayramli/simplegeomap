@@ -23,20 +23,6 @@ gltiles = {
     "p10g": [-90, -50, 90, 180, 1, 4363, 10800, 4800] }
 
 
-files = [("lake1","/tmp/gshhg-shp-2.3.7/GSHHS_shp/i/GSHHS_i_L2.shp"),
-         ("river1","/tmp/gshhg-shp-2.3.7/WDBII_shp/i/WDBII_river_i_L01.shp"),
-         ("river2","/tmp/gshhg-shp-2.3.7/WDBII_shp/i/WDBII_river_i_L02.shp"),
-         ("river3","/tmp/gshhg-shp-2.3.7/WDBII_shp/i/WDBII_river_i_L03.shp"),
-         ("river4","/tmp/gshhg-shp-2.3.7/WDBII_shp/i/WDBII_river_i_L04.shp"),
-         ("river5","/tmp/gshhg-shp-2.3.7/WDBII_shp/i/WDBII_river_i_L05.shp"),
-         ("river6","/tmp/gshhg-shp-2.3.7/WDBII_shp/i/WDBII_river_i_L06.shp"),
-         ("river7","/tmp/gshhg-shp-2.3.7/WDBII_shp/i/WDBII_river_i_L07.shp"),
-         ("river8","/tmp/gshhg-shp-2.3.7/WDBII_shp/i/WDBII_river_i_L08.shp"),
-         ("river9","/tmp/gshhg-shp-2.3.7/WDBII_shp/i/WDBII_river_i_L09.shp"),
-         ("river10","/tmp/gshhg-shp-2.3.7/WDBII_shp/i/WDBII_river_i_L10.shp"),
-         ("river11","/tmp/gshhg-shp-2.3.7/WDBII_shp/i/WDBII_river_i_L11.shp")
-]
-
 # Datafile is from https://www.ngdc.noaa.gov/mgg/topo/gltiles.html, download
 # "all files in on zip", extract zip under /tmp
 def preprocess_GLOBE_tile(tile):
@@ -65,32 +51,6 @@ def preprocess_GLOBE():
         if os.path.basename(x) in gltiles: 
             print (x, os.path.basename(x))
             preprocess_GLOBE_tile(os.path.basename(x))
-
-def preprocess_GSHHS():         # 
-    
-    res = []
-    for type,file in files:
-        print (file)
-        sf = shapefile.Reader(file)
-        r = sf.records()
-        waters = sf.shapes()
-        print (len(waters))
-        for idx in range(len(waters)):
-            water = waters[idx]
-            name = r[idx]
-            print (name,len(water.parts))
-            bounds = list(water.parts) + [len(water.points)]
-            for (previous, current) in zip(bounds, bounds[1:]):
-                geo = [[x[1],x[0]] for x in water.points[previous:current]]
-                if len(geo) < 1: continue
-                latlons = [LatLon(a[0],a[1]) for a in geo]
-                per = np.round(perimeterOf(latlons, radius=6371),2)
-                mid = meanOf(latlons)
-                res.append([mid.lat,mid.lon,per,type,geo])
-
-    df = pd.DataFrame(res)
-    df.columns = ['lat','lon','perimeter','type','polygon']
-    df.to_csv('/tmp/lake_river.csv',index=None)
     
 def initialize_kernel(size , sigma): 
     w, h = size                                                  

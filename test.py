@@ -114,7 +114,7 @@ def test_lines():
         
 if __name__ == "__main__":
 
-    # test_main()
+    test_main()
     # test_elev1()
     # test_elev2()
     # test_elev3()
@@ -125,5 +125,5 @@ if __name__ == "__main__":
     # test_continent()
     # test_force_inc()
     # test_color()
-    test_lines()
+    # test_lines()
         
