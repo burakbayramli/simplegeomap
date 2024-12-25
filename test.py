@@ -110,11 +110,19 @@ def test_lines():
     sm.plot_countries(clat=40,clon=10,ax=ax,zoom=1.0)
     sm.plot_poly(pts,ax,color='red')
     plt.savefig(tmp + '/out10-2.jpg')
+
+def test_ukr():
+    clat,clon = 48, 35
+    zoom = 1.0
+    fig, ax = plt.subplots() 
+    sm.plot_countries(clat,clon,zoom=zoom,ax=ax,force_include=['RUS'])
+    sm.plot_water(clat,clon,zoom=zoom,ax=ax)
+    plt.savefig('/tmp/sm_09.jpg',quality=40)    
     
         
 if __name__ == "__main__":
 
-    test_main()
+    # test_main()
     # test_elev1()
     # test_elev2()
     # test_elev3()
@@ -126,4 +134,5 @@ if __name__ == "__main__":
     # test_force_inc()
     # test_color()
     # test_lines()
+    test_ukr()
         

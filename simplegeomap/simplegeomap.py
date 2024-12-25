@@ -1,5 +1,4 @@
 from simplegeomap.util import gltiles, find_tile, conv2d, initialize_kernel, padding
-from pygeodesy.sphericalNvector import LatLon
 from pygeodesy.sphericalNvector import LatLon, perimeterOf, meanOf
 import pandas as pd, zipfile, sys, os, csv, io
 from PIL import Image
@@ -29,7 +28,6 @@ def plot_water(clat,clon,zoom,watercolor='cyan',ax=None):
         per = np.round(perimeterOf(latlons, radius=6371),2)
         mid = meanOf(latlons)
         latlons = [[a.lat,a.lon] for a in latlons]
-        #folium.PolyLine(locations=latlons,weight=2,color = 'red').add_to(m)
         plot_line(np.array(latlons), ax, color=watercolor)
 
     file = data_dir + "/GSHHS_l_L2.shp"
@@ -48,7 +46,6 @@ def plot_water(clat,clon,zoom,watercolor='cyan',ax=None):
         per = np.round(perimeterOf(latlons, radius=6371),2)
         mid = meanOf(latlons)
         latlons = [[a.lat,a.lon] for a in latlons]
-        #folium.Polygon(locations=latlons,weight=2,color = 'red').add_to(m)
         plot_region(np.array(latlons), ax, color=watercolor)
 
               
